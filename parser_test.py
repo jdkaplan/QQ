@@ -20,15 +20,6 @@ class TestParser(unittest.TestCase):
             with self.assertRaises(parser.IncompleteParseError):
                 parser.parse(ident)
 
-    def test_errors(self):
-        bad_program = textwrap.dedent(
-            """\
-            def do_something {
-            """
-        )
-        with self.assertRaises(parser.IncompleteParseError):
-            parser.parse(bad_program)
-
     def test_strings(self):
         accepted = ['"Hello, world!"', '""', r'"backslash-escaped quote \" characters"']
         for string in accepted:
@@ -40,15 +31,41 @@ class TestParser(unittest.TestCase):
                 parser.parse(string)
 
     def test_numbers(self):
-        accepted = ["0", "1", "123", "123.321", "12.0"]
+        accepted = ["0", "1", "123", "123.321", "12.0", "-1", "-0", "-123.321", "-12.0"]
         for number in accepted:
             self.assertEqual(parser.parse(number).text, number)
 
-        # TODO: Hmm... do we really need negative numbers?  :P
-        rejected = ["0.", ".0", "-5"]
+        rejected = ["0.", ".0"]
         for number in rejected:
             with self.assertRaises(parser.IncompleteParseError):
                 parser.parse(number)
+
+    def test_simple_math_1(self):
+        source = textwrap.dedent(
+            """\
+            1
+            1
+            +
+            3
+            -
+            """
+        )
+        parser.parse(source)
+
+    def test_simple_math_2(self):
+        source = textwrap.dedent(
+            """\
+            1
+            1
+            3
+            # [ 1 1 3 ]
+            +
+            # [ 3 2 ]
+            -
+            # [ 1 ]
+            """
+        )
+        parser.parse(source)
 
 
 if __name__ == "__main__":

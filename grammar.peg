@@ -1,32 +1,12 @@
-program = statements? whitespace?
+program = whitespace? statements? whitespace?
 statements = statement (whitespace statement)*
-statement = definition / expression
-definition = keyword_def
-             whitespace
-             identifier
-             whitespace?
-             (params whitespace?)?
-             block
-params = l_paren whitespace? identifier whitespace? r_paren
-block = l_brace statements r_brace
-
-expression = call / literal / identifier
-call = identifier l_paren whitespace? args? whitespace? r_paren
-args = identifier
+statement = comment / literal / command
 literal = string / number
-
-# TODO: Special forms!
+command = identifier
 
 string = ~'"([^\"]|\\")*"'
 number = ~"-?\d+(\.\d+)?"
 
-identifier = ~"\w+"
+identifier = ~"[^\d\s\".]\S*"
 whitespace = ~"\s+"
-
-comma = ","
-l_paren = "("
-r_paren = ")"
-l_brace = "{"
-r_brace = "}"
-
-keyword_def = "def"
+comment = ~"^#.*$"
