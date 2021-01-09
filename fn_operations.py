@@ -12,3 +12,11 @@ class FnCall:
         body.execute(Env(qframe=subqframe, rqueue=None, fnqueue=env.fnqueue))
 
         env.qframe.push(subqframe)
+
+class FnDef:
+    # TODO
+    def execute(self, env):
+        fname = env.qframe.pop()
+        f_body = env.qframe.pop()
+
+        env.fnqueue[fname] = f_body
