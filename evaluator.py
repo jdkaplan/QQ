@@ -1,13 +1,13 @@
-from collections import deque
+from environment import Env
 
 def repl():
-    qframe = deque()
+    env = Env
     while (inp := input("> ")) != "QUIT!": # or whatever
         inst = parse(inp)       # TODO
-        inst.execute(qframe)
+        inst.execute(env)
 
 def evaluate_file(fname):
     with open(fname) as f:
-        qframe = deque()
+        env = Env
         inst_q = parse(f.read()) # TODO
-        inst_q.execute(qframe) # assuming this will be a Queue for now
+        inst_q.execute(env) # assuming this will be a Queue for now

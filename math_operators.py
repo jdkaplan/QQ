@@ -1,6 +1,6 @@
 class BinOp:
-    def execute(self, qframe):
-        l, r = qframe.pop(), qframe.pop()
+    def execute(self, env):
+        l, r = env.qframe.pop(), env.qframe.pop()
         qframe.push(type(l)(self.op(l.v, r.v)))
 
 class Add(BinOp):
