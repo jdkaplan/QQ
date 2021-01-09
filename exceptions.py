@@ -1,0 +1,2 @@
+class QQError(Exception):
+    pass
