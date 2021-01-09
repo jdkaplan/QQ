@@ -1,4 +1,4 @@
-class BinOp(Symbol):
+class BinOp:
     def execute(self, qframe):
         l, r = qframe.pop(), qframe.pop()
         qframe.push(self.op(l.v, r.v))
