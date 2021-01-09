@@ -2,7 +2,7 @@ from collections import deque
 
 def repl():
     qframe = deque()
-    while (inp := input("> ")) != "QUIT!":
+    while (inp := input("> ")) != "QUIT!": # or whatever
         inst = parse(inp)       # TODO
         inst.execute(qframe)
 
