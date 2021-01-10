@@ -1,4 +1,8 @@
-# QQ
+# QQ: *The* Queue Based Programming Language
+
+*Winner of the -03, 30 minutes or it's free, and self-documenting awards from Quirky Languages Done Quick!*
+
+*Note:  This language is a WIP MVP for the QLDQ mini-hackathon.  It is lacking a certain amount of polish, and there are no promises or expectations that these will ever be polished away.  Feel free to fork if you want to modify or improve (within MIT license allowances), and have fun!*
 
 A programming language built on the oft-overshadowed datatype, the queue.  While languages like Forth and its ilk are based on stacks, QQ strives to take the road less travelled.  QQ is a language whose power is that every advanced data structure, including the frame itself, is a form of queue.
 
