@@ -24,7 +24,7 @@ class RQAlloc(Command):
     def execute(self, env):
         if env.rqueue is not None:
             raise exceptions.QQError("Register queue is already allocated")
-        size = env.qframe.pop()
+        size = env.qframe.popleft()
         env.rqueue = RQueue(size)
 
 
@@ -66,7 +66,7 @@ class QQueueBase:
     def get_queue(self, env):
         if type(env.qframe[0]) != datatypes.Queue:
             raise exceptions.QQException("Element at front of queue is not a Queue")
-        self.queue = env.qframe.pop()
+        self.queue = env.qframe.popleft()
 
     def return_queue(self, env):
         env.qframe.append(self.queue)
@@ -131,6 +131,6 @@ class QDrain(Command, DrainBase, QQueueBase): pass
 
 class Pack(Command):
     def execute(self, env):
-        size = env.popleft()
-        new_q = datatypes.Queue([env.qframe.pop() for _ in range(size)])
+        size = env.qframe.popleft()
+        new_q = datatypes.Queue([env.qframe.popleft() for _ in range(size)])
         env.qframe.append(new_q)
