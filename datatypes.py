@@ -36,12 +36,18 @@ class String(Statement):
         env.qframe.append(self)
 
 
-@dataclass(frozen=True)
-class Block:
-    statements: list[Statement]
+class Block(ASQ):
+    def __init__(self, statements):
+        self.statements = deque(statements)
 
     def execute(self, env):
         env.qframe.append(Queue(self.statements))
+
+    def __eq__(self, other):
+        return type(self) == type(other) and self.statements == other.statements
+
+    def __repr__(self):
+        return f"<{type(self).__name__}(statements={repr(self.statements)})>"
 
 
 class Queue(ASQ):
@@ -63,3 +69,6 @@ class Queue(ASQ):
 
     def __eq__(self, other):
         return type(self) == type(other) and self.statements == other.statements
+
+    def __repr__(self):
+        return f"<{type(self).__name__}(statements={repr(self.statements)})>"

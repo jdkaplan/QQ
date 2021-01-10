@@ -125,6 +125,19 @@ class TestParser(unittest.TestCase):
         expected = parser.Queue([])
         self.assertQueue(actual, expected)
 
+    def test_block(self):
+        actual = parser.parse(textwrap.dedent("""\
+        [ 1 2 "a" ]
+        """))
+        expected = parser.Queue([
+            parser.Block([
+                parser.Number(1.0),
+                parser.Number(2.0),
+                parser.String("a"),
+            ])
+        ])
+        self.assertQueue(actual, expected)
+
     def assertQueue(self, actual, expected):
         assert type(actual) == type(expected), f"Expected #{type(expected)} got #{type(actual)}"
         self.assertEqual(actual.statements, expected.statements)

@@ -8,7 +8,8 @@ from datatypes import (
     Number,
     String,
     Queue,
-    Boolean
+    Boolean,
+    Block,
 )
 
 from identifier import Identifier
@@ -72,6 +73,16 @@ class Visitor(NodeVisitor):
 
     def visit_comment(self, node, visited_children):
         return Queue([])
+
+    def visit_lbracket(self, node, visited_children):
+        return Queue([])
+
+    def visit_rbracket(self, node, visited_children):
+        return Queue([])
+
+    def visit_block(self, node, visited_children):
+        _lbr, *queues, _rbr = visited_children
+        return Queue([Block(self._flatten(queues).statements)])
 
     def generic_visit(self, node, visited_children):
         if node.expr_name == "":
