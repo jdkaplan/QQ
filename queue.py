@@ -82,7 +82,7 @@ class RotBase:
     def execute(self, env):
         self.get_queue(env)
         self.push(env, self.pop(env))
-        self.return_queue()
+        self.return_queue(env)
 
 
 class Rot(Command, RotBase, QueueFrameBase): pass
@@ -94,7 +94,7 @@ class PopBase:
     def execute(self, env):
         self.get_queue(env)
         self.pop(env)
-        self.return_queue()
+        self.return_queue(env)
 
 
 class Pop(Command, PopBase, QueueFrameBase): pass
@@ -106,7 +106,7 @@ class PushBase:
     def execute(self, env):
         self.get_queue(env)
         self.push(env, env.qframe.popleft())
-        self.return_queue()
+        self.return_queue(env)
 
 
 class Push(Command, PushBase, QueueFrameBase): pass  # This is the same as Rot, but left it for funsies
@@ -122,6 +122,7 @@ class DrainBase:
                 pass
         except IndexError:
             pass
+        self.return_queue(env)
 
 
 class Drain(Command, DrainBase, QueueFrameBase): pass  # This is the same as Rot, but left it for funsies
