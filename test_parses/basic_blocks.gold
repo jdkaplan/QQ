@@ -1,1 +1,1 @@
-Queue(statements=deque([Block(statements=deque([Number(value=1.0), Number(value=2.0), Number(value=3.0)])), Command(name='Print'), Command(name='QPop'), Command(name='Print'), Command(name='QDrain'), Command(name='Print')]))
+Queue(statements=deque([Block(statements=deque([Number(value=1), Number(value=2), Number(value=3)])), Command(name='Print'), Command(name='QPop'), Command(name='Print'), Command(name='QDrain'), Command(name='Print')]))

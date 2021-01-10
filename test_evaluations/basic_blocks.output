@@ -1,4 +1,2 @@
-Queue(statements=deque([Number(value=1.0), Number(value=2.0), Number(value=3.0)]))
-Queue(statements=deque([Number(value=2.0), Number(value=3.0)]))
-Queue(statements=deque([]))
-[Queue(statements=deque([]))]
+Queue(statements=deque([Number(value=1), Number(value=2), Number(value=3)]))
+1

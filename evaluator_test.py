@@ -15,12 +15,21 @@ class SampleFile:
 
 
 class TestEvaluator(unittest.TestCase):
+    excluded_programs = [
+        # This program takes a very long time to terminate.
+        'rule',
+    ]
+
     def sample_programs(self):
         input_dir = os.path.join(os.path.dirname(__file__), 'test_programs')
         output_dir = os.path.join(os.path.dirname(__file__), 'test_evaluations')
         samples = []
         for filename in os.listdir(input_dir):
             base, _ = os.path.splitext(filename)
+
+            if base in self.excluded_programs:
+                continue
+
             input_path = os.path.join(input_dir, filename)
             stdout_path = os.path.join(output_dir, base + '.output')
             samples.append(SampleFile(base, input_path, stdout_path))
