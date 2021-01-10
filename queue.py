@@ -118,8 +118,8 @@ class DrainBase:
     def execute(self, env):
         self.get_queue(env)
         try:
-            while self.pop(env):
-                pass
+            while True:
+                self.pop(env)
         except IndexError:
             pass
         self.return_queue(env)
