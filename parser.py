@@ -55,7 +55,10 @@ class Visitor(NodeVisitor):
         return Queue(visited_children)
 
     def visit_string(self, node, visited_children):
-        literal = String(node.text.replace(r"\"", '"'))
+        # Drop the wrapping quotes
+        contents = node.text[1:-1]
+        # Unescape escaped quotes
+        literal = String(contents.replace(r"\"", '"'))
         return Queue([literal])
 
     def visit_number(self, node, visited_children):
