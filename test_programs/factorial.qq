@@ -1,0 +1,30 @@
+"factorial"
+[
+    dup
+    1
+    rot
+    !=
+    [
+	dup
+	[ ]
+	dec
+	rot
+	"factorial"
+	qpush
+	rot
+	call
+
+	rot
+	exec
+	*
+    ]
+    rot
+    if
+]
+def
+
+"factorial"
+[ 10 ]
+call
+exec
+print
