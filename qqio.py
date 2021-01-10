@@ -21,9 +21,9 @@ class ReadNumber(Command):
 
 class Print(Command):
     def execute(self, env):
-        print(env.qframe[0].value)
+        print(str(env.qframe[0]))
 
 
 class Write(Command):
     def execute(self, env):
-        print(env.qframe[0].value, end='')
+        print(str(env.qframe[0]), end='')

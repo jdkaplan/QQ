@@ -19,6 +19,9 @@ class Boolean:
     def execute(self, env):
         env.qframe.append(self)
 
+    def __str__(self):
+        return str(self.value)
+
 
 @dataclass(frozen=True)
 class Number(Statement):
@@ -27,6 +30,9 @@ class Number(Statement):
     def execute(self, env):
         env.qframe.append(self)
 
+    def __str__(self):
+        return str(self.value)
+
 
 @dataclass(frozen=True)
 class String(Statement):
@@ -34,6 +40,9 @@ class String(Statement):
 
     def execute(self, env):
         env.qframe.append(self)
+
+    def __str__(self):
+        return self.value
 
 
 class Block(ASQ):
@@ -48,6 +57,10 @@ class Block(ASQ):
 
     def __repr__(self):
         return f"<{type(self).__name__}(statements={repr(self.statements)})>"
+
+    def __str__(self):
+        return repr(self)
+
 
 
 class Queue(ASQ):
@@ -72,3 +85,6 @@ class Queue(ASQ):
 
     def __repr__(self):
         return f"<{type(self).__name__}(statements={repr(self.statements)})>"
+
+    def __str__(self):
+        return repr(self)
