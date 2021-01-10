@@ -85,3 +85,7 @@ QQ provides some basic IO operations:  `write`, `print`, and `QQ`.
 `write` and `print` both print out the element at the front of the queue (without popping it off), but cannot access anything other than the frontmost queue.  They differ only in that print additionally puts a newline at the end.
 
 `QQ` is a signal to the computer that you are now in tears and as a mercy it prints the entire **qframe** and then terminates the program to spare you from further harm.
+
+## Running
+
+Currently, QQ is run by executing the `evaluator.py` program with Python 3.9+.  If given a filename afterwards, QQ will execute the whole file.  Otherwise, it will dump you into a shell.
