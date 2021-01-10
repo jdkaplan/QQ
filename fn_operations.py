@@ -9,14 +9,14 @@ class FnCall(command.Command):
     def execute(self, env):
         fname = env.qframe.popleft()
         subqframe = env.qframe.popleft()
-        body = env.fnqueue[fname]
+        body = env.fnqueue[fname].copy()
 
-        term = body.execute(Env(qframe=subqframe, rqueue=None, fnqueue=env.fnqueue))
+        term = body.execute(Env(qframe=subqframe.statements, rqueue=None, fnqueue=env.fnqueue))
 
-        if term == LOOP_TERMINATE:
+        if term == command.LOOP_TERMINATE:
             raise exceptions.QQError("Can't break from a function")
 
-        env.qframe.push(subqframe)
+        env.qframe.append(subqframe)
 
 
 class FnDef(command.Command):
@@ -30,3 +30,8 @@ class FnDef(command.Command):
 class Ret(command.Command):
     def execute(self, env):
         return command.FUNC_TERMINATE
+
+
+class Exec(command.Command):
+    def execute(self, env):
+        env.qframe.popleft().execute(env)
