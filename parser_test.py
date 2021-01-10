@@ -54,7 +54,7 @@ class TestParser(unittest.TestCase):
         for number in accepted:
             with self.subTest(number):
                 actual = parser.parse(number)
-                expected = parser.Queue([parser.Number(float(number))])
+                expected = parser.Queue([parser.Number(int(number))])
                 self.assertEqual(actual, expected)
 
         rejected = ["0.", ".0"]

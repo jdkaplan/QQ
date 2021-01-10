@@ -57,7 +57,7 @@ class Visitor(NodeVisitor):
         }.get(escape, escape)
 
     def visit_number(self, node, visited_children):
-        literal = Number(float(node.text))
+        literal = Number(int(node.text))
         return Queue([literal])
 
     def visit_boolean(self, node, visited_children):

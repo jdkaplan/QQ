@@ -16,7 +16,7 @@ class ReadLine(Command):
 
 class ReadNumber(Command):
     def execute(self, env):
-        env.qframe.append(datatypes.Number(float(input())))
+        env.qframe.append(datatypes.Number(int(input())))
 
 
 class Print(Command):

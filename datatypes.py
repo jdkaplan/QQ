@@ -30,7 +30,7 @@ class Boolean(Statement, ValueCopy):
 
 @dataclass(frozen=True)
 class Number(Statement, ValueCopy):
-    value: float
+    value: int
 
     def execute(self, env):
         env.qframe.append(self)
