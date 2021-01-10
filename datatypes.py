@@ -20,7 +20,7 @@ class Boolean:
 
 @dataclass(frozen=True)
 class Number(Statement):
-    value: str
+    value: float
 
     def execute(self, env):
         env.qframe.append(self)

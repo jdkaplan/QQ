@@ -55,7 +55,7 @@ class Visitor(NodeVisitor):
         }.get(escape, escape)
 
     def visit_number(self, node, visited_children):
-        literal = Number(node.text)
+        literal = Number(float(node.text))
         return Queue([literal])
 
     def visit_identifier(self, node, visited_children):
