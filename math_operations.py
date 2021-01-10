@@ -1,4 +1,6 @@
-class BinOp:
+from command import Command
+
+class BinOp(Command):
     def execute(self, env):
         l, r = env.qframe.popleft(), env.qframe.popleft()
         env.qframe.append(type(l)(self.op(l.value, r.value)))
