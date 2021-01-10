@@ -125,9 +125,22 @@ class DrainBase:
         self.return_queue(env)
 
 
-class Drain(Command, DrainBase, QueueFrameBase): pass  # This is the same as Rot, but left it for funsies
+class Drain(Command, DrainBase, QueueFrameBase): pass
 class RDrain(Command, DrainBase, RegisterQueueBase): pass
 class QDrain(Command, DrainBase, QQueueBase): pass
+
+
+class DupBase:
+    def execute(self, env):
+        self.get_queue(env)
+        elm = self.pop(env)
+        self.push(elm)
+        self.push(elm.copy())
+
+
+class Dup(Command, DupBase, QueueFrameBase): pass
+class RDup(Command, DupBase, RegisterQueueBase): pass
+class QDup(Command, DupBase, QQueueBase): pass
 
 
 class Pack(Command):

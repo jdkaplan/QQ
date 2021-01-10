@@ -7,13 +7,18 @@ class ASQ:
     pass
 
 
+class ValueCopy:
+    def copy(self):
+        return type(self)(self.value)
+
+
 @dataclass(frozen=True)
 class Statement(ASQ):
     pass
 
 
 @dataclass(frozen=True)
-class Boolean:
+class Boolean(Statement, ValueCopy):
     value: bool
 
     def execute(self, env):
@@ -24,7 +29,7 @@ class Boolean:
 
 
 @dataclass(frozen=True)
-class Number(Statement):
+class Number(Statement, ValueCopy):
     value: float
 
     def execute(self, env):
@@ -35,7 +40,7 @@ class Number(Statement):
 
 
 @dataclass(frozen=True)
-class String(Statement):
+class String(Statement, ValueCopy):
     value: str
 
     def execute(self, env):
@@ -60,6 +65,9 @@ class Block(ASQ):
 
     def __str__(self):
         return repr(self)
+
+    def copy(self):
+        return Block([s.copy() for s in self.statement])
 
 
 
@@ -88,3 +96,6 @@ class Queue(ASQ):
 
     def __str__(self):
         return repr(self)
+
+    def copy(self):
+        return Queue([s.copy() for s in self.statement])
