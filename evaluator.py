@@ -4,7 +4,7 @@ from environment import Env
 import parser
 
 def repl():
-    env = Env
+    env = Env()
     while (inp := input("> ")) != "QUIT!": # or whatever
         inst = parser.parse(inp)       # TODO
         inst.execute(env)
