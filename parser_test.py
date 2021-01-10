@@ -48,9 +48,10 @@ class TestParser(unittest.TestCase):
     def test_numbers(self):
         accepted = ["0", "1", "123", "123.321", "12.0", "-1", "-0", "-123.321", "-12.0"]
         for number in accepted:
-            actual = parser.parse(number)
-            expected = parser.Queue([parser.Number(number)])
-            self.assertQueue(actual, expected)
+            with self.subTest(number):
+                actual = parser.parse(number)
+                expected = parser.Queue([parser.Number(float(number))])
+                self.assertQueue(actual, expected)
 
         rejected = ["0.", ".0"]
         for number in rejected:
@@ -70,10 +71,10 @@ class TestParser(unittest.TestCase):
         actual = parser.parse(source)
         expected = parser.Queue(
             [
-                parser.Number("1"),
-                parser.Number("1"),
+                parser.Number(1),
+                parser.Number(1),
                 math_operations.Add(),
-                parser.Number("3"),
+                parser.Number(3),
                 math_operations.Sub(),
             ]
         )
@@ -95,9 +96,9 @@ class TestParser(unittest.TestCase):
         actual = parser.parse(source)
         expected = parser.Queue(
             [
-                parser.Number("1"),
-                parser.Number("1"),
-                parser.Number("3"),
+                parser.Number(1),
+                parser.Number(1),
+                parser.Number(3),
                 parser.Identifier("+"),
                 parser.Identifier("-"),
             ]
@@ -106,7 +107,7 @@ class TestParser(unittest.TestCase):
 
     def test_single_number(self):
         actual = parser.parse("1")
-        expected = parser.Queue([parser.Number("1")])
+        expected = parser.Queue([parser.Number(1)])
         self.assertQueue(actual, expected)
 
     def test_comment(self):
@@ -116,7 +117,7 @@ class TestParser(unittest.TestCase):
             """
         )
         actual = parser.parse(source)
-        expected = parser.Queue([parser.Number("1"), parser.Identifier("print")])
+        expected = parser.Queue([parser.Number(1), parser.Identifier("print")])
         self.assertQueue(actual, expected)
 
     def test_comments_are_not_identifiers(self):
