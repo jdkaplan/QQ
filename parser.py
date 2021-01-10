@@ -10,43 +10,75 @@ with open("grammar.peg") as f:
     grammar = Grammar(f.read())
 
 
-@dataclass(frozen=True)
-class Statement:
+class ASQ:
     pass
 
 
 @dataclass(frozen=True)
-class Identifier:
+class Statement(ASQ):
+    pass
+
+
+@dataclass(frozen=True)
+class Identifier(Statement):
     name: str
 
 
 @dataclass(frozen=True)
-class Expression:
-    pass
+class Number(Statement):
+    value: str
 
 
 @dataclass(frozen=True)
-class Command(Expression):
-    pass
+class String(Statement):
+    value: str
 
 
 @dataclass(frozen=True)
-class Program:
+class Queue(ASQ):
     statements: list[Statement]
 
 
 class Visitor(NodeVisitor):
-    # def visit_program(self, node, visited_children):
-    #     return Program(node.children)
+    def visit_program(self, node, visited_children):
+        return self._flatten(visited_children)
 
-    # def visit_identifier(self, node, _visited_children):
-    #     return Identifier(node.text)
+    def visit_statements(self, node, visited_children):
+        return self._flatten(visited_children)
 
-    # def visit_expression(self, node, visited_children):
-    #     return Expression(visited_children)
+    def visit_statement(self, node, visited_children):
+        assert len(visited_children) == 1
+        return visited_children[0]
+
+    def visit_command(self, node, visited_children):
+        assert len(visited_children) == 1
+        return Queue(visited_children)
+
+    def visit_string(self, node, visited_children):
+        literal = String(node.text.replace(r"\"", '"'))
+        return Queue([literal])
+
+    def visit_number(self, node, visited_children):
+        literal = Number(node.text)
+        return Queue([literal])
+
+    def visit_identifier(self, node, visited_children):
+        literal = Identifier(node.text)
+        return Queue([literal])
+
+    def visit_whitespace(self, node, visited_children):
+        return Queue([])
+
+    def visit_comment(self, node, visited_children):
+        return Queue([])
 
     def generic_visit(self, node, visited_children):
-        return node
+        if node.expr_name == "":
+            return self._flatten(visited_children)
+        assert False, f"Missing visitor for node type: {node.expr_name}"
+
+    def _flatten(self, visited_children):
+        return Queue([stmt for queue in visited_children for stmt in queue.statements])
 
 
 def parse(text):

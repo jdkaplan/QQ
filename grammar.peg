@@ -1,7 +1,6 @@
 program = whitespace? statements? whitespace?
 statements = statement (whitespace statement)*
-statement = comment / literal / command
-literal = string / number
+statement = comment / string / number / command
 command = identifier
 
 string = ~'"([^\"]|\\")*"'
