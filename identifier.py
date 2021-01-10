@@ -1,4 +1,5 @@
 import fn_operations
+import loop
 import math_operations
 import qqio
 import queue
@@ -38,6 +39,7 @@ identifiers = {
     'pack': queue.Pack,
     'if': cond.If,
     'ifelse': cond.IfElse,
+    'loop': loop.Loop
     'not': cond.Not,
     '==': cond.Equals,
     '!=': cond.NotEquals,
