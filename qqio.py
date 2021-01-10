@@ -7,7 +7,7 @@ class QQ(Command):
     def execute(self, env):
         pprint.pprint(list(env.qframe), compact=True)
         pprint.pprint(list(env.rqueue.q), compact=True)
-        exit(1)
+        # exit(1)
 
 
 class ReadLine(Command):
