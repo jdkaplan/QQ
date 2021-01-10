@@ -13,6 +13,7 @@
     rpush
     rdup
     r==
+    rrot
     rifbreak
     qrot
     rdec
@@ -103,6 +104,9 @@ def
   2
   rot
   qpush
+  rot
+
+  QQ
 ]
 
 [ 1 0 1 2 ]
