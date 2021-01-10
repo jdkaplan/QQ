@@ -50,7 +50,9 @@ class TestParser(unittest.TestCase):
             -
             """
         )
-        parser.parse(source)
+        actual = parser.parse(source)
+        expected = None
+        self.assertEqual(actual, expected)
 
     def test_simple_math_2(self):
         source = textwrap.dedent(
@@ -66,6 +68,11 @@ class TestParser(unittest.TestCase):
             """
         )
         parser.parse(source)
+
+    def test_wat(self):
+        actual = parser.parse("1")
+        expected = parser.Queue([parser.Number("1")])
+        self.assertEqual(actual, expected)
 
 
 if __name__ == "__main__":
