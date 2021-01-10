@@ -1,0 +1,1 @@
+Queue(statements=deque([Number(value=1.0), Number(value=2.0), Command(name='Add'), Number(value=2.0), Command(name='Sub'), Command(name='Print'), Command(name='Drain'), Number(value=1.0), Number(value=2.0), Number(value=2.0), Command(name='Add'), Command(name='Sub'), Command(name='Print')]))

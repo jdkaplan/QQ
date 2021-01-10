@@ -1,0 +1,1 @@
+Queue(statements=deque([String(value='hello'), String(value=' '), String(value='world'), Command(name='Add'), Command(name='Add'), Command(name='Print')]))

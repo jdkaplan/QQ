@@ -6,6 +6,8 @@ import parser
 import identifier
 import math_operations
 
+write_golden_files = False
+
 
 class TestParser(unittest.TestCase):
     def test_empty(self):
@@ -140,31 +142,39 @@ class TestParser(unittest.TestCase):
         ])
         self.assertEqual(actual, expected)
 
-    def test_str_concat(self):
-        actual = parser.parse(textwrap.dedent("""\
-        "hello"
-        " "
-        "world"
-        +
-        +
-        print    # "worldhello "
-        """))
-        expected = parser.Queue([
-            parser.String("hello"),
-            parser.String(" "),
-            parser.String("world"),
-            parser.Identifier("+"),
-            parser.Identifier("+"),
-            parser.Identifier("print"),
-        ])
-        self.assertEqual(actual, expected)
+    def sample_programs(self):
+        input_dir = os.path.join(os.path.dirname(__file__), 'test_programs')
+        output_dir = os.path.join(os.path.dirname(__file__), 'test_parses')
+        pairs = []
+        for filename in os.listdir(input_dir):
+            base, _ = os.path.splitext(filename)
+            input_path = os.path.join(input_dir, filename)
+            output_path = os.path.join(output_dir, base + '.gold')
+            pairs.append((base, input_path, output_path))
+        return pairs
 
+    @unittest.skipIf(write_golden_files, 'writing golden files')
     def test_sample_programs(self):
-        directory = os.path.join(os.path.dirname(__file__), 'test_programs')
-        for filename in os.listdir(directory):
-            with self.subTest(filename):
-                with open(os.path.join(directory, filename)) as f:
-                    parser.parse(f.read())
+        for base, input_path, output_path in self.sample_programs():
+            with self.subTest(base):
+                with open(input_path) as inp:
+                    source = inp.read()
+                with open(output_path) as out:
+                    expected = out.read()
+
+                asq = parser.parse(source)
+                actual = str(asq)
+                self.assertEqual(actual, expected)
+
+    @unittest.skipIf(not write_golden_files, 'not writing golden files')
+    def test_write_golden_files(self):
+        for base, input_path, output_path in self.sample_programs():
+            with self.subTest(base):
+                with open(input_path) as inp:
+                    source = inp.read()
+                asq = parser.parse(source)
+                with open(output_path, 'w') as out:
+                    out.write(str(asq))
 
 
 if __name__ == "__main__":
