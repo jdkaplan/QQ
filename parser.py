@@ -7,7 +7,8 @@ import parsimonious.exceptions
 from datatypes import (
     Number,
     String,
-    Queue
+    Queue,
+    Boolean
 )
 
 from identifier import Identifier
@@ -56,6 +57,10 @@ class Visitor(NodeVisitor):
 
     def visit_number(self, node, visited_children):
         literal = Number(float(node.text))
+        return Queue([literal])
+
+    def visit_boolean(self, node, visited_children):
+        literal = Boolean(node.text == "true")
         return Queue([literal])
 
     def visit_identifier(self, node, visited_children):

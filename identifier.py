@@ -2,6 +2,7 @@ import fn_operations
 import math_operations
 import qqio
 import queue
+import cond
 
 identifiers = {
     'call': fn_operations.FnCall,
@@ -32,6 +33,15 @@ identifiers = {
     'qpush': queue.QPush,
     'rqalloc': queue.RQAlloc,
     'pack': queue.Pack,
+    'if': cond.If,
+    'ifelse': cond.IfElse,
+    'not': cond.Not,
+    '==': cond.Equals,
+    '!=': cond.NotEquals,
+    '<': cond.LessThan,
+    '<=': cond.LessThanEquals,
+    '>': cond.GreaterThan,
+    '>=': cond.GreaterThanEquals,
 }
 
 

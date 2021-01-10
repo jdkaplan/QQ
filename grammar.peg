@@ -1,10 +1,11 @@
 program = whitespace? statements? whitespace?
 statements = statement (whitespace statement)*
-statement = comment / string / number / command
+statement = comment / string / number / boolean / command
 command = identifier
 
 string = ~'"([^\"]|\\")*"'
 number = ~"-?\d+(\.\d+)?"
+boolean = ~"true|false"
 
 identifier = ~"[^\d\s\".]\S*"
 whitespace = ~"\s+"
