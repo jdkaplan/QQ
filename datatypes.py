@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Boolean:
     def __init__(self, truth):
         self.val = truth
@@ -32,9 +35,15 @@ class Block:
 
 class Queue:
     def __init__(self, contents):
-        self.contents = contents
+        self.contents = deque(contents)
 
     def execute(self, env):
         while self.contents:
             inst = self.contents.pop()
             inst.execute(env)
+
+    def pop(self):
+        self.contents.pop()
+
+    def push(self, val):
+        self.contents.append(val)
