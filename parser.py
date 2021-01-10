@@ -42,6 +42,7 @@ class Visitor(NodeVisitor):
         return Queue([literal])
 
     def _unescape_string(self, match):
+        escape = match.group(0)
         return {
             r'\"': '"',
             r'\b': "\b",
@@ -51,7 +52,7 @@ class Visitor(NodeVisitor):
             r'\t': "\t",
             r'\v': "\v",
             r'\\': "\\",
-        }.get(match.group(0), match.group(0))
+        }.get(escape, escape)
 
     def visit_number(self, node, visited_children):
         literal = Number(node.text)
