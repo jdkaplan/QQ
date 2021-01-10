@@ -13,7 +13,6 @@ class String:
         env.qframe.push(self)
 
 class Block:
-    # TODO
     def __init__(self, contents):
         self.contents = contents
 
@@ -21,7 +20,6 @@ class Block:
         env.qframe.push(Queue(self.contents))
 
 class Queue:
-    # TODO
     def __init__(self, contents):
         self.contents = contents
 
