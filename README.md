@@ -20,7 +20,7 @@ Additionally, one can create additional **Queues**, but they are not independent
 
 ## Datatypes
 
-There are 4 different types of objects that can be put into memory: **Integers**, **Strings**, **Queues**.
+There are 4 different types of objects that can be put into memory: **Integers**, **Strings**, **Queues**, **Booleans**.
 
 **Integers** can be any whole number and behave analagously to integers in Python or most other modern languages for the sake of basic arithmetic.
 
