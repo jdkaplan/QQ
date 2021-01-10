@@ -44,7 +44,8 @@ identifiers = {
     'qdup': queue.QDup,
     'if': cond.If,
     'ifelse': cond.IfElse,
-    'loop': loop.Loop
+    'loop': loop.Loop,
+    'rifbreak': loop.RIfBreak,
     'not': cond.Not,
     '==': cond.Equals,
     '!=': cond.NotEquals,
