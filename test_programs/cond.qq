@@ -1,5 +1,88 @@
-false
+true
 not
-[ drain "hello world" print ]
+[ "hello world" print pop ]
+[ "bye world" print pop ]
+ifelse
+
+true
+true
+!=
+[ "hello world" print pop ]
+[ "bye world" print pop ]
+ifelse
+
+true
+true
+==
+[ "hello world" print pop ]
+[ "bye world" print pop ]
+ifelse
+
+1
+2
+>=
+[ "hello world" print pop ]
+[ "bye world" print pop ]
+ifelse
+
+1
+2
+>
+[ "hello world" print pop ]
+[ "bye world" print pop ]
+ifelse
+
+1
+2
+<
+[ "hello world" print pop ]
+[ "bye world" print pop ]
+ifelse
+
+1
+2
+<=
+[ "hello world" print pop ]
+[ "bye world" print pop ]
+ifelse
+
+true
+not
+[ "hello world" print pop ]
 if
-QQ
+
+true
+true
+!=
+[ "hello world" print pop ]
+if
+
+true
+true
+==
+[ "hello world" print pop ]
+if
+
+1
+2
+>=
+[ "hello world" print pop ]
+if
+
+1
+2
+>
+[ "hello world" print pop ]
+if
+
+1
+2
+<
+[ "hello world" print pop ]
+if
+
+1
+2
+<=
+[ "hello world" print pop ]
+if
