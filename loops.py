@@ -7,7 +7,7 @@ class While(command.Command):
         while cond.value == True:
             resp = body.execute(env)
             if resp == command.LOOP_TERMINATE:
-                return None
+                return command.NO_TERMINATE
             elif resp == command.FUNC_TERMINATE:
                 return command.FUNC_TERMINATE
             cond = env.qframe.popleft()
