@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+import re
 
 from parsimonious.grammar import Grammar
 from parsimonious.nodes import NodeVisitor
@@ -13,6 +13,7 @@ from datatypes import (
 from identifier import Identifier
 
 IncompleteParseError = parsimonious.exceptions.IncompleteParseError
+VisitationError = parsimonious.exceptions.VisitationError
 
 with open("grammar.peg") as f:
     grammar = Grammar(f.read())
@@ -37,8 +38,20 @@ class Visitor(NodeVisitor):
         # Drop the wrapping quotes
         contents = node.text[1:-1]
         # Unescape escaped quotes
-        literal = String(contents.replace(r"\"", '"'))
+        literal = String(re.sub(r'\\["bfnrtv\\]', self._unescape_string, contents))
         return Queue([literal])
+
+    def _unescape_string(self, match):
+        return {
+            r'\"': '"',
+            r'\b': "\b",
+            r'\f': "\f",
+            r'\n': "\n",
+            r'\r': "\r",
+            r'\t': "\t",
+            r'\v': "\v",
+            r'\\': "\\",
+        }.get(match.group(0), match.group(0))
 
     def visit_number(self, node, visited_children):
         literal = Number(node.text)

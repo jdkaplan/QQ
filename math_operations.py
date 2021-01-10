@@ -3,6 +3,9 @@ class BinOp:
         l, r = env.qframe.popleft(), env.qframe.popleft()
         env.qframe.push(type(l)(self.op(l.value, r.value)))
 
+    def __eq__(self, other):
+        return type(self) == type(other)
+
 
 class Add(BinOp):
     op = lambda l, r: l + r

@@ -56,3 +56,6 @@ class Queue(ASQ):
 
     def push(self, value):
         self.statements.append(value)
+
+    def __eq__(self, other):
+        return type(self) == type(other) and self.statements == other.statements

@@ -3,9 +3,9 @@ from collections import deque
 import datatypes
 import exceptions
 import pprint
+from command import Command
 
-
-class RQueue:
+class RQueue(Command):
     def __init__(self, size):
         self.q = deque([])
         self.size = size
@@ -20,7 +20,7 @@ class RQueue:
         return self.q.popleft()
 
 
-class RQAlloc:
+class RQAlloc(Command):
     def execute(self, env):
         if env.rqueue is not None:
             raise exceptions.QQError("Register queue is already allocated")
@@ -85,9 +85,9 @@ class RotBase:
         self.return_queue()
 
 
-class Rot(RotBase, QueueFrameBase): pass
-class RRot(RotBase, RegisterQueueBase): pass
-class QRot(RotBase, QQueueBase): pass
+class Rot(Command, RotBase, QueueFrameBase): pass
+class RRot(Command, RotBase, RegisterQueueBase): pass
+class QRot(Command, RotBase, QQueueBase): pass
 
 
 class PopBase:
@@ -97,9 +97,9 @@ class PopBase:
         self.return_queue()
 
 
-class Pop(PopBase, QueueFrameBase): pass
-class RPop(PopBase, RegisterQueueBase): pass
-class QPop(PopBase, QQueueBase): pass
+class Pop(Command, PopBase, QueueFrameBase): pass
+class RPop(Command, PopBase, RegisterQueueBase): pass
+class QPop(Command, PopBase, QQueueBase): pass
 
 
 class PushBase:
@@ -109,6 +109,6 @@ class PushBase:
         self.return_queue()
 
 
-class Push(PushBase, QueueFrameBase): pass  # This is the same as Rot, but left it for funsies
-class RPush(PushBase, RegisterQueueBase): pass
-class QPush(PushBase, QQueueBase): pass
+class Push(Command, PushBase, QueueFrameBase): pass  # This is the same as Rot, but left it for funsies
+class RPush(Command, PushBase, RegisterQueueBase): pass
+class QPush(Command, PushBase, QQueueBase): pass

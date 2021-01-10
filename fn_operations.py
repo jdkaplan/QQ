@@ -1,8 +1,9 @@
 from environment import Env
+from command import Command
 
 # TODO we may want to combine these operator/operations things in a different way
 
-class FnCall:
+class FnCall(Command):
     def execute(self, env):
         fname = env.qframe.popleft()
         subqframe = env.qframe.popleft()
@@ -12,7 +13,7 @@ class FnCall:
 
         env.qframe.push(subqframe)
 
-class FnDef:
+class FnDef(Command):
     def execute(self, env):
         fname = env.qframe.popleft()
         f_body = env.qframe.popleft()
