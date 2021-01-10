@@ -8,6 +8,137 @@ A programming language built on the oft-overshadowed datatype, the queue.  While
 
 And it's clearly very intuitive to use.
 
+## Rites of Passage
+
+Here are some of the programs that language designers are contractually obligated to write:
+
+`hello_world.qq`:
+```
+"hello world"
+print
+```
+
+`fizz_buzz.qq`:
+```
+"fizzbuzz"
+[
+  dup
+
+  100
+  rot
+  >
+  [ ret ]
+  rot
+  if
+
+  dup
+
+  3
+  rot
+  %
+  [
+    dup
+
+    5 rot
+    %
+    [ print ]
+    [ "buzz" rot print pop ]
+    rot
+    ifelse
+  ]
+  [
+    "fizz" rot write pop
+    dup
+
+    5 rot
+    %
+    [ " " rot print pop ]
+    [ "buzz" rot print pop ]
+    rot
+    ifelse
+  ]
+  rot
+  ifelse
+
+  1
+  +
+  1
+  rot
+  pack
+
+  "fizzbuzz"
+  rot
+  call
+]
+def
+
+"fizzbuzz"
+[ 1 ]
+call
+```
+
+`factorial.qq`:
+```
+"factorial"
+[
+    dup
+    1
+    rot
+    !=
+    [
+        dup
+        [ ]
+        dec
+        rot
+        "factorial"
+        qpush
+        rot
+        call
+
+        rot
+        exec
+        *
+    ]
+    rot
+    if
+]
+def
+
+"loop_factorial"
+[
+    [
+        1
+        dup
+        rot
+        ==
+        [ break ]
+        dec
+        rot
+        if
+        dup
+        *
+    ]
+    dup
+    loop
+    pop
+]
+def
+
+
+"factorial"
+[ 10 ]
+call
+exec
+print
+pop
+
+"loop_factorial"
+[ 10 ]
+call
+exec
+print
+```
+
 ## Memory Model
 
 There are in essence two places to store data.  Unlike many "modern" programming languages, QQ eschews the use of random access variables.  The only nameable things by default are functions, but everything else lives in a queue.
