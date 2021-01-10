@@ -4,12 +4,11 @@ import command
 class Loop(command.Command):
     def execute(self, env):
         body = env.qframe.popleft()
-        while True:
-            resp = body.copy().execute(env)
-            if resp == command.LOOP_TERMINATE:
-                return command.NO_TERMINATE
-            elif resp == command.FUNC_TERMINATE:
-                return command.FUNC_TERMINATE
+        resp = body.execute_loop(env)
+        if resp == command.LOOP_TERMINATE:
+            return command.NO_TERMINATE
+        elif resp == command.FUNC_TERMINATE:
+            return command.FUNC_TERMINATE
 
 
 class RIfBreak(command.Command):

@@ -82,6 +82,14 @@ class Queue(ASQ):
             if term != command.NO_TERMINATE:
                 return term
 
+    def execute_loop(self, env):
+        while self.statements:
+            inst = self.statements.popleft()
+            self.statements.append(inst.copy())
+            term = inst.execute(env)
+            if term != command.NO_TERMINATE:
+                return term
+
     def pop(self):
         return self.statements.popleft()
 
