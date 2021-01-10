@@ -63,6 +63,7 @@ def
   loop
   rpop  # shifted value now
 
+  rot rot pop
   rdup
   rot 2
   rpop
