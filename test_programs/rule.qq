@@ -1,0 +1,108 @@
+# Setup queue register for window
+4 rqalloc
+0 rpush
+
+"newval"
+[
+	3 rot rot rqalloc
+	rpush
+
+  [
+	0
+    rot
+    rpush
+	rdup
+    r==
+    rifbreak
+    qrot
+    rdec
+  ]
+  rot
+  loop
+
+  qpop rot pop
+]
+def
+
+[
+	loop
+  rpop  # shifted value now
+
+  rdup
+  rot 2
+  rpop
+  # rules state 2 number
+  dup
+  # state 2 number rules rules
+  rot "newval" pack
+  # rules state "newval" [ number rules ]
+  rot rot
+  # "newval" [ number rules ] rules state
+  call
+  # rules state [ nextval ]
+  rot rot exec rot
+  # state nextval rules
+  qpush rot
+  # nextstate rules
+
+  2 7 rot rot rpush rpush r* r&
+  rdup
+  rot 2
+  rpop
+  # rules state 2 number
+  dup
+  # state 2 number rules rules
+  rot "newval" pack
+  # rules state "newval" [ number rules ]
+  rot rot
+  # "newval" [ number rules ] rules state
+  call
+  # rules state [ nextval ]
+  rot rot exec rot
+  # state nextval rules
+  qpush rot
+  # nextstate rules
+
+	rot
+  2
+  rot
+  qpush
+]
+
+[
+	2 7
+  rot rot
+  rpush rpush
+  r* r&
+  2 qpop rot rpush rpush
+  rrot rrot
+  rdup
+  rrot
+  r==
+  rrot
+  rrot
+  rifbreak
+
+  r|
+  rdup
+  rot 2
+  rpop
+  # rules state 2 number
+  dup
+  # state 2 number rules rules
+  rot "newval" pack
+  # rules state "newval" [ number rules ]
+  rot rot
+  # "newval" [ number rules ] rules state
+  call
+  # rules state [ nextval ]
+  rot rot exec rot
+  # state nextval rules
+  qpush rot
+  # nextstate rules
+]
+
+[ 1 0 1 2 ]
+[ 0 1 1 1 0 1 1 0 ]
+
+loop

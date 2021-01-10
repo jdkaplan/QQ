@@ -93,11 +93,14 @@ class QRot(Command, RotBase, QQueueBase): pass
 class PopBase:
     def execute(self, env):
         self.get_queue(env)
-        self.pop(env)
+        env.qframe.append(self.pop(env))
         self.return_queue(env)
 
 
-class Pop(Command, PopBase, QueueFrameBase): pass
+class Pop(Command):
+    def execute(self, env):
+        env.qframe.popleft()
+
 class RPop(Command, PopBase, RegisterQueueBase): pass
 class QPop(Command, PopBase, QQueueBase): pass
 
