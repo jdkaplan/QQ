@@ -149,6 +149,14 @@ class TestParser(unittest.TestCase):
         ])
         self.assertEqual(actual, expected)
 
+    def test_blocks_need_spaces(self):
+        with self.assertRaises(parser.IncompleteParseError):
+            parser.parse("[a]")
+
+        actual = parser.parse("[ 1 ]")
+        expected = parser.Queue([parser.Block([parser.Number(1.0)])])
+        self.assertEqual(actual, expected)
+
     def test_nested_block(self):
         actual = parser.parse(textwrap.dedent("""\
         [
