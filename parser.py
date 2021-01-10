@@ -4,39 +4,17 @@ from parsimonious.grammar import Grammar
 from parsimonious.nodes import NodeVisitor
 import parsimonious.exceptions
 
+from datatypes import (
+    Identifier
+    Number,
+    String,
+    Queue
+)
+
 IncompleteParseError = parsimonious.exceptions.IncompleteParseError
 
 with open("grammar.peg") as f:
     grammar = Grammar(f.read())
-
-
-class ASQ:
-    pass
-
-
-@dataclass(frozen=True)
-class Statement(ASQ):
-    pass
-
-
-@dataclass(frozen=True)
-class Identifier(Statement):
-    name: str
-
-
-@dataclass(frozen=True)
-class Number(Statement):
-    value: str
-
-
-@dataclass(frozen=True)
-class String(Statement):
-    value: str
-
-
-@dataclass(frozen=True)
-class Queue(ASQ):
-    statements: list[Statement]
 
 
 class Visitor(NodeVisitor):

@@ -1,25 +1,40 @@
 from collections import deque
+from dataclasses import dataclass
+
+class ASQ:
+    pass
 
 
+@dataclass(frozen=True)
+class Statement(ASQ):
+    pass
+
+
+@dataclass(frozen=True)
+class Identifier(Statement):
+    name: str
+
+
+@dataclass
 class Boolean:
     def __init__(self, truth):
-        self.val = truth
+        self.value = truth
 
     def execute(self, env):
         env.qframe.push(self)
 
 
-class Number:
-    def __init__(self, flt):
-        self.val = flt
+@dataclass(frozen=True)
+class Number(Statement):
+    value: str
 
     def execute(self, env):
         env.qframe.push(self)
 
 
-class String:
-    def __init__(self, s):
-        self.val = s
+@dataclass(frozen=True)
+class String(Statement):
+    value: str
 
     def execute(self, env):
         env.qframe.push(self)
@@ -33,17 +48,17 @@ class Block:
         env.qframe.push(Queue(self.contents))
 
 
-class Queue:
-    def __init__(self, contents):
-        self.contents = deque(contents)
+@dataclass(frozen=True)
+class Queue(ASQ):
+    statements: list[Statement]
 
     def execute(self, env):
-        while self.contents:
-            inst = self.contents.pop()
+        while self.statements:
+            inst = self.statements.pop()
             inst.execute(env)
 
     def pop(self):
-        self.contents.pop()
+        self.statements.pop()
 
-    def push(self, val):
-        self.contents.append(val)
+    def push(self, value):
+        self.statements.append(value)
