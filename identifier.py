@@ -17,7 +17,7 @@ identifiers = {
     '^': math_operations.BitXor,
     'QQ': qqio.QQ,
     'read_line': qqio.ReadLine,
-    'read_num': qqio.ReadNum,
+    'read_num': qqio.ReadNumber,
     'print': qqio.Print,
     'rot': queue.Rot,
     'rrot': queue.RRot,
