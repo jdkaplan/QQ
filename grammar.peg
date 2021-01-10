@@ -3,7 +3,7 @@ statements = statement (whitespace statement)*
 statement = comment / string / number / boolean / command
 command = identifier
 
-string = ~'"([^\"]|\\")*"'
+string = ~'"([^\"]|\\")*?"'
 number = ~"-?\d+(\.\d+)?"
 boolean = ~"true|false"
 
