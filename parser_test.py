@@ -95,8 +95,6 @@ class TestParser(unittest.TestCase):
                 parser.Identifier("-"),
             ]
         )
-        print(actual)
-        print(expected)
         self.assertEqual(actual, expected)
 
     def test_single_number(self):
@@ -105,6 +103,16 @@ class TestParser(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_comment(self):
+        source = textwrap.dedent(
+            """\
+            1 a # I am a comment
+            """
+        )
+        actual = parser.parse(source)
+        expected = parser.Queue([parser.Number("1"), parser.Identifier("a")])
+        self.assertEqual(actual, expected)
+
+    def test_comments_are_not_identifiers(self):
         actual = parser.parse("# I am a comment")
         expected = parser.Queue([])
         self.assertEqual(actual, expected)

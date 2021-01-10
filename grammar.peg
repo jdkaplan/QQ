@@ -8,4 +8,4 @@ number = ~"-?\d+(\.\d+)?"
 
 identifier = ~"[^\d\s\".]\S*"
 whitespace = ~"\s+"
-comment = ~"^#.*$"
+comment = ~"#[^\r\n]*"
