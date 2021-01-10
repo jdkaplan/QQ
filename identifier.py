@@ -6,6 +6,7 @@ import queue
 identifiers = {
     'call': fn_operations.FnCall,
     'def': fn_operations.FnDef,
+    'ret': fn_operations.Ret,
     '+': math_operations.Add,
     '-': math_operations.Sub,
     '*': math_operations.Mul,

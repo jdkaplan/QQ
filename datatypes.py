@@ -1,3 +1,5 @@
+import command
+
 from collections import deque
 from dataclasses import dataclass
 
@@ -49,7 +51,9 @@ class Queue(ASQ):
     def execute(self, env):
         while self.statements:
             inst = self.statements.popleft()
-            inst.execute(env)
+            term = inst.execute(env)
+            if term != command.NO_TERMINATE:
+                return term
 
     def pop(self):
         self.statements.popleft()

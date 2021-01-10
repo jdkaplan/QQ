@@ -1,21 +1,32 @@
+import command
+import exceptions
 from environment import Env
-from command import Command
+
 
 # TODO we may want to combine these operator/operations things in a different way
 
-class FnCall(Command):
+class FnCall(command.Command):
     def execute(self, env):
         fname = env.qframe.popleft()
         subqframe = env.qframe.popleft()
         body = env.fnqueue[fname]
 
-        body.execute(Env(qframe=subqframe, rqueue=None, fnqueue=env.fnqueue))
+        term = body.execute(Env(qframe=subqframe, rqueue=None, fnqueue=env.fnqueue))
+
+        if term == LOOP_TERMINATE:
+            raise exceptions.QQError("Can't break from a function")
 
         env.qframe.push(subqframe)
 
-class FnDef(Command):
+
+class FnDef(command.Command):
     def execute(self, env):
         fname = env.qframe.popleft()
         f_body = env.qframe.popleft()
 
         env.fnqueue[fname] = f_body
+
+
+class Ret(command.Command):
+    def execute(self, env):
+        return command.FUNC_TERMINATE
