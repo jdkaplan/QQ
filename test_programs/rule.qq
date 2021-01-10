@@ -4,14 +4,14 @@
 
 "newval"
 [
-	3 rot rot rqalloc
-	rpush
+  3 rot rot rqalloc
+  rpush
 
   [
-	0
+    0
     rot
     rpush
-	rdup
+    rdup
     r==
     rifbreak
     qrot
@@ -25,7 +25,41 @@
 def
 
 [
-	loop
+  [
+    2 7
+    rot rot
+    rpush rpush
+    r* r&
+    2 qpop rot rpush rpush
+    rrot rrot
+    rdup
+    rrot
+    r==
+    rrot
+    rrot
+    rifbreak
+
+    r|
+    rdup
+    rot 2
+    rpop
+    # rules state 2 number
+    dup
+    # state 2 number rules rules
+    rot "newval" pack
+    # rules state "newval" [ number rules ]
+    rot rot
+    # "newval" [ number rules ] rules state
+    call
+    # rules state [ nextval ]
+    rot rot exec rot
+    # state nextval rules
+    qpush rot
+    # nextstate rules
+  ]
+
+  rot rot
+  loop
   rpop  # shifted value now
 
   rdup
@@ -63,43 +97,10 @@ def
   qpush rot
   # nextstate rules
 
-	rot
+  rot
   2
   rot
   qpush
-]
-
-[
-	2 7
-  rot rot
-  rpush rpush
-  r* r&
-  2 qpop rot rpush rpush
-  rrot rrot
-  rdup
-  rrot
-  r==
-  rrot
-  rrot
-  rifbreak
-
-  r|
-  rdup
-  rot 2
-  rpop
-  # rules state 2 number
-  dup
-  # state 2 number rules rules
-  rot "newval" pack
-  # rules state "newval" [ number rules ]
-  rot rot
-  # "newval" [ number rules ] rules state
-  call
-  # rules state [ nextval ]
-  rot rot exec rot
-  # state nextval rules
-  qpush rot
-  # nextstate rules
 ]
 
 [ 1 0 1 2 ]
