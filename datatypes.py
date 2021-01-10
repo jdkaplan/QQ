@@ -61,7 +61,7 @@ class Block(ASQ):
         return type(self) == type(other) and self.statements == other.statements
 
     def __repr__(self):
-        return f"<{type(self).__name__}(statements={repr(self.statements)})>"
+        return f"{type(self).__name__}(statements={repr(self.statements)})"
 
     def __str__(self):
         return repr(self)
@@ -92,7 +92,7 @@ class Queue(ASQ):
         return type(self) == type(other) and self.statements == other.statements
 
     def __repr__(self):
-        return f"<{type(self).__name__}(statements={repr(self.statements)})>"
+        return f"{type(self).__name__}(statements={repr(self.statements)})"
 
     def __str__(self):
         return repr(self)
