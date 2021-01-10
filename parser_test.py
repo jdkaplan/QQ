@@ -30,8 +30,9 @@ class TestParser(unittest.TestCase):
         accepted = {
             '"Hello, world!"': "Hello, world!",
             '""': "",
-            r'"backslash-escaped quote \" characters"': 'backslash-escaped quote " characters',
+            # r'"backslash-escaped quote \" characters"': 'backslash-escaped quote " characters',
             r'"\b\f\n\r\t\v\\"': "\b\f\n\r\t\v\\",
+            r'"\""': '"',
         }
         for source, contents in accepted.items():
             with self.subTest(source):
@@ -135,6 +136,25 @@ class TestParser(unittest.TestCase):
                 parser.Number(2.0),
                 parser.String("a"),
             ])
+        ])
+        self.assertEqual(actual, expected)
+
+    def test_str_concat(self):
+        actual = parser.parse(textwrap.dedent("""\
+        "hello"
+        " "
+        "world"
+        +
+        +
+        print    # "worldhello "
+        """))
+        expected = parser.Queue([
+            parser.String("hello"),
+            parser.String(" "),
+            parser.String("world"),
+            parser.Identifier("+"),
+            parser.Identifier("+"),
+            parser.Identifier("print"),
         ])
         self.assertEqual(actual, expected)
 

@@ -4,7 +4,7 @@ statement = comment / block / string / number / boolean / command
 command = identifier
 block = lbracket whitespace? statements whitespace? rbracket
 
-string = ~'"([^\"]|\\")*?"'
+string = ~'"[^\n]*"'
 number = ~"-?\d+(\.\d+)?"
 boolean = ~"true|false"
 
