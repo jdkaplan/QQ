@@ -19,6 +19,7 @@ identifiers = {
     'read_line': qqio.ReadLine,
     'read_num': qqio.ReadNumber,
     'print': qqio.Print,
+    'write': qqio.Write,
     'rot': queue.Rot,
     'rrot': queue.RRot,
     'qrot': queue.QRot,
