@@ -1,21 +1,21 @@
 import pprint
 
 class QQ:
-    def execute(self, frame):
-        pprint.pprint(list(frame), compact=True)
+    def execute(self, env):
+        pprint.pprint(list(env.qframe), compact=True)
         exit(1)
 
 
 class ReadLine:
-    def execute(self, frame):
-        frame.append(input())
+    def execute(self, env):
+        env.qframe.append(input())
 
 
 class ReadNumber:
-    def execute(self, frame):
-        frame.append(float(input()))
+    def execute(self, env):
+        env.qframe.append(float(input()))
 
 
 class Print:
-    def execute(self, frame):
-        print(frame[0], end='')
+    def execute(self, env):
+        print(env.qframe[0], end='')
