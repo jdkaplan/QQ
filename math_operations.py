@@ -40,3 +40,15 @@ class BitOr(BinOp):
 
 class BitXor(BinOp):
     op = lambda self, l, r: l ^ r
+
+
+class Inc(Command):
+    def execute(self, env):
+        v = env.qframe.popleft()
+        env.qframe.append(type(v)(v.value + 1))
+
+
+class Dec(Command):
+    def execute(self, env):
+        v = env.qframe.popleft()
+        env.qframe.append(type(v)(v.value - 1))
