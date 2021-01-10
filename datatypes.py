@@ -83,7 +83,7 @@ class Queue(ASQ):
                 return term
 
     def pop(self):
-        self.statements.popleft()
+        return self.statements.popleft()
 
     def push(self, value):
         self.statements.append(value)

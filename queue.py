@@ -11,6 +11,7 @@ class RQueue(Command):
         self.size = size
 
     def push(self, val):
+        assert val is not None
         assert self.size >= len(self.q)
         if self.size == len(self.q):
             raise exceptions.QQError("Register queue is full.")
@@ -139,6 +140,7 @@ class DupBase:
         elm = self.pop(env)
         self.push(env, elm)
         self.push(env, elm.copy())
+        self.return_queue(env)
 
 
 class Dup(Command, DupBase, QueueFrameBase): pass

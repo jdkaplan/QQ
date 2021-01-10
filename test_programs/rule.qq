@@ -45,6 +45,7 @@ def
     rpop
     # rules state 2 number
     dup
+
     # state 2 number rules rules
     rot "newval" pack
     # rules state "newval" [ number rules ]
