@@ -1,13 +1,13 @@
-from command import LOOP_TERMINATE, FUNC_TERMINATE
+import command
 
-class While:
+class While(command.Command):
     def execute(self, env):
         cond = env.qframe.popleft()
         body = env.qframe.popleft()
         while cond.value == True:
             resp = body.execute(env)
-            if resp == LOOP_TERMINATE:
+            if resp == command.LOOP_TERMINATE:
                 return None
-            elif resp == FUNC_TERMINATE:
-                return FUNC_TERMINATE
+            elif resp == command.FUNC_TERMINATE:
+                return command.FUNC_TERMINATE
             cond = env.qframe.popleft()
