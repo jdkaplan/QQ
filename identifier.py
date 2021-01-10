@@ -18,6 +18,8 @@ identifiers = {
     '&': math_operations.BitAnd,
     '|': math_operations.BitOr,
     '^': math_operations.BitXor,
+    'inc': math_operations.Inc,
+    'dec': math_operations.Dec,
     'QQ': qqio.QQ,
     'read_line': qqio.ReadLine,
     'read_num': qqio.ReadNumber,
@@ -37,6 +39,9 @@ identifiers = {
     'qdrain': queue.QDrain,
     'rqalloc': queue.RQAlloc,
     'pack': queue.Pack,
+    'dup': queue.Dup,
+    'rdup': queue.RDup,
+    'qdup': queue.QDup,
     'if': cond.If,
     'ifelse': cond.IfElse,
     'loop': loop.Loop
