@@ -43,9 +43,6 @@ class BoolBinOp(command.Command):
         l, r = env.qframe.popleft(), env.qframe.popleft()
         env.qframe.append(datatypes.Boolean(self.op(l.value, r.value)))
 
-    def __eq__(self, other):
-        return type(self) == type(other)
-
 
 class Equals(BoolBinOp):
     op = lambda self, l, r: l == r
