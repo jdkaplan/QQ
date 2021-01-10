@@ -5,7 +5,7 @@ from parsimonious.nodes import NodeVisitor
 import parsimonious.exceptions
 
 from datatypes import (
-    Identifier
+    Identifier,
     Number,
     String,
     Queue
