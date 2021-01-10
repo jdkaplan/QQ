@@ -114,6 +114,21 @@ class RPush(Command, PushBase, RegisterQueueBase): pass
 class QPush(Command, PushBase, QQueueBase): pass
 
 
+class DrainBase:
+    def execute(self, env):
+        self.get_queue(env)
+        try:
+            while self.pop(env):
+                pass
+        except IndexError:
+            pass
+
+
+class Drain(Command, DrainBase, QueueFrameBase): pass  # This is the same as Rot, but left it for funsies
+class RDrain(Command, DrainBase, RegisterQueueBase): pass
+class QDrain(Command, DrainBase, QQueueBase): pass
+
+
 class Pack(Command):
     def execute(self, env):
         size = env.popleft()
