@@ -30,3 +30,8 @@ class FnDef(command.Command):
 class Ret(command.Command):
     def execute(self, env):
         return command.FUNC_TERMINATE
+
+
+class Exec(command.Command):
+    def execute(self, env):
+        env.qframe.popleft().execute(env)
