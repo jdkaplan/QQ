@@ -1,3 +1,10 @@
+class Boolean:
+    def __init__(self, truth):
+        self.val = truth
+
+    def execute(self, env):
+        env.qframe.push(self)
+
 class Number:
     def __init__(self, flt):
         self.val = flt
