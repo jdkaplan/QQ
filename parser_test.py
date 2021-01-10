@@ -1,4 +1,5 @@
 import textwrap
+import os
 import unittest
 
 import parser
@@ -157,6 +158,13 @@ class TestParser(unittest.TestCase):
             parser.Identifier("print"),
         ])
         self.assertEqual(actual, expected)
+
+    def test_sample_programs(self):
+        directory = os.path.join(os.path.dirname(__file__), 'test_programs')
+        for filename in os.listdir(directory):
+            with self.subTest(filename):
+                with open(os.path.join(directory, filename)) as f:
+                    parser.parse(f.read())
 
 
 if __name__ == "__main__":
