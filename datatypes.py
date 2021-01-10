@@ -11,11 +11,6 @@ class Statement(ASQ):
 
 
 @dataclass(frozen=True)
-class Identifier(Statement):
-    name: str
-
-
-@dataclass(frozen=True)
 class Boolean:
     value: bool
 

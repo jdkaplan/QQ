@@ -5,11 +5,12 @@ from parsimonious.nodes import NodeVisitor
 import parsimonious.exceptions
 
 from datatypes import (
-    Identifier,
     Number,
     String,
     Queue
 )
+
+from identifier import Identifier
 
 IncompleteParseError = parsimonious.exceptions.IncompleteParseError
 
