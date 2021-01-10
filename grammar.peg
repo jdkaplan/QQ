@@ -2,7 +2,7 @@ program = whitespace? statements? whitespace?
 statements = statement (whitespace statement)*
 statement = comment / block / string / number / boolean / command
 command = identifier
-block = lbracket whitespace? statements whitespace? rbracket
+block = lbracket whitespace? (statements whitespace?)? rbracket
 
 string = ~'"[^\n]*"'
 number = ~"-?\d+(\.\d+)?"

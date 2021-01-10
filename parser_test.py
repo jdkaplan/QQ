@@ -142,6 +142,32 @@ class TestParser(unittest.TestCase):
         ])
         self.assertEqual(actual, expected)
 
+    def test_empty_block(self):
+        actual = parser.parse("[ ]")
+        expected = parser.Queue([
+            parser.Block([])
+        ])
+        self.assertEqual(actual, expected)
+
+    def test_nested_block(self):
+        actual = parser.parse(textwrap.dedent("""\
+        [
+          1 2 "a"
+          [ "b" ]
+        ]
+        """))
+        expected = parser.Queue([
+            parser.Block([
+                parser.Number(1.0),
+                parser.Number(2.0),
+                parser.String("a"),
+                parser.Block([
+                    parser.String("b"),
+                ]),
+            ]),
+        ])
+        self.assertEqual(actual, expected)
+
     def sample_programs(self):
         input_dir = os.path.join(os.path.dirname(__file__), 'test_programs')
         output_dir = os.path.join(os.path.dirname(__file__), 'test_parses')
