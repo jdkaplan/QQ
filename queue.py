@@ -134,8 +134,8 @@ class DupBase:
     def execute(self, env):
         self.get_queue(env)
         elm = self.pop(env)
-        self.push(elm)
-        self.push(elm.copy())
+        self.push(env, elm)
+        self.push(env, elm.copy())
 
 
 class Dup(Command, DupBase, QueueFrameBase): pass
