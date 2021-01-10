@@ -4,8 +4,8 @@ from environment import Env
 
 class FnCall:
     def execute(self, env):
-        fname = env.qframe.pop()
-        subqframe = env.qframe.pop()
+        fname = env.qframe.popleft()
+        subqframe = env.qframe.popleft()
         body = env.fnqueue[fname]
 
         body.execute(Env(qframe=subqframe, rqueue=None, fnqueue=env.fnqueue))
@@ -14,7 +14,7 @@ class FnCall:
 
 class FnDef:
     def execute(self, env):
-        fname = env.qframe.pop()
-        f_body = env.qframe.pop()
+        fname = env.qframe.popleft()
+        f_body = env.qframe.popleft()
 
         env.fnqueue[fname] = f_body

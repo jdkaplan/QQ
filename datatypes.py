@@ -15,7 +15,7 @@ class Boolean:
     value: bool
 
     def execute(self, env):
-        env.qframe.push(self)
+        env.qframe.append(self)
 
 
 @dataclass(frozen=True)
@@ -23,7 +23,7 @@ class Number(Statement):
     value: str
 
     def execute(self, env):
-        env.qframe.push(self)
+        env.qframe.append(self)
 
 
 @dataclass(frozen=True)
@@ -31,7 +31,7 @@ class String(Statement):
     value: str
 
     def execute(self, env):
-        env.qframe.push(self)
+        env.qframe.append(self)
 
 
 @dataclass(frozen=True)
@@ -39,20 +39,20 @@ class Block:
     statements: list[Statement]
 
     def execute(self, env):
-        env.qframe.push(Queue(self.statements))
+        env.qframe.append(Queue(self.statements))
 
 
-@dataclass()
 class Queue(ASQ):
-    statements: list[Statement]
+    def __init__(self, statements):
+        self.statements = deque(statements)
 
     def execute(self, env):
         while self.statements:
-            inst = self.statements.pop()
+            inst = self.statements.popleft()
             inst.execute(env)
 
     def pop(self):
-        self.statements.pop()
+        self.statements.popleft()
 
     def push(self, value):
         self.statements.append(value)

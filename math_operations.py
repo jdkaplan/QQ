@@ -1,6 +1,6 @@
 class BinOp:
     def execute(self, env):
-        l, r = env.qframe.pop(), env.qframe.pop()
+        l, r = env.qframe.popleft(), env.qframe.popleft()
         env.qframe.push(type(l)(self.op(l.value, r.value)))
 
 

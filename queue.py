@@ -17,7 +17,7 @@ class RQueue:
         self.q.append(val)
 
     def pop(self):
-        return self.q.pop()
+        return self.q.popleft()
 
 
 class RQAlloc:
@@ -36,7 +36,7 @@ class QueueFrameBase:
         pass
 
     def pop(self, env):
-        return env.qframe.pop()
+        return env.qframe.popleft()
 
     def push(self, env, val):
         env.qframe.append(val)
@@ -105,7 +105,7 @@ class QPop(PopBase, QQueueBase): pass
 class PushBase:
     def execute(self, env):
         self.get_queue(env)
-        self.push(env, env.qframe.pop())
+        self.push(env, env.qframe.popleft())
         self.return_queue()
 
 

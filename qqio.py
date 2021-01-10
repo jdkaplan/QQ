@@ -1,3 +1,4 @@
+import datatypes
 import pprint
 
 class QQ:
@@ -8,14 +9,14 @@ class QQ:
 
 class ReadLine:
     def execute(self, env):
-        env.qframe.append(input())
+        env.qframe.append(datatypes.String(input()))
 
 
 class ReadNumber:
     def execute(self, env):
-        env.qframe.append(float(input()))
+        env.qframe.append(datatypes.Number(float(input())))
 
 
 class Print:
     def execute(self, env):
-        print(env.qframe[0], end='')
+        print(env.qframe[0].value, end='')
