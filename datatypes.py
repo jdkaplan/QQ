@@ -15,10 +15,9 @@ class Identifier(Statement):
     name: str
 
 
-@dataclass
+@dataclass(frozen=True)
 class Boolean:
-    def __init__(self, truth):
-        self.value = truth
+    value: bool
 
     def execute(self, env):
         env.qframe.push(self)
@@ -40,15 +39,15 @@ class String(Statement):
         env.qframe.push(self)
 
 
+@dataclass(frozen=True)
 class Block:
-    def __init__(self, contents):
-        self.contents = contents
+    statements: list[Statement]
 
     def execute(self, env):
-        env.qframe.push(Queue(self.contents))
+        env.qframe.push(Queue(self.statements))
 
 
-@dataclass(frozen=True)
+@dataclass()
 class Queue(ASQ):
     statements: list[Statement]
 
