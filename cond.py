@@ -7,27 +7,23 @@ import command
 class If(command.Command):
     def execute(self, env):
         if len(env.qframe) < 2 or type(env.qframe[1]) != datatypes.Queue:
-            raise QQError("If statement needs a condition and code block in the front of the queue.")
+            raise exceptions.QQError("If statement needs a condition and code block in the front of the queue.")
         cond = env.qframe.popleft()
         consequent = env.qframe.popleft()
 
-        res = bool(cond.value)
-        env.qframe.append(res)
-        if res:
+        if bool(cond.value):
             return consequent.execute(env)
 
 
 class IfElse(command.Command):
     def execute(self, env):
         if len(env.qframe) < 2 or type(env.qframe[1]) != datatypes.Queue:
-            raise QQError("If statement needs a condition and code block in the front of the queue.")
+            raise exceptions.QQError("If statement needs a condition and code block in the front of the queue.")
         cond = env.qframe.popleft()
         consequent = env.qframe.popleft()
         alternative = env.qframe.popleft()
 
-        res = bool(cond.value)
-        env.qframe.append(res)
-        if res:
+        if bool(cond.value):
             return consequent.execute(env)
         else:
             return alternative.execute(env)
