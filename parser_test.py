@@ -50,7 +50,7 @@ class TestParser(unittest.TestCase):
                     parser.parse(string)
 
     def test_numbers(self):
-        accepted = ["0", "1", "123", "123.321", "12.0", "-1", "-0", "-123.321", "-12.0"]
+        accepted = ["0", "1", "123", "-1", "-0"]
         for number in accepted:
             with self.subTest(number):
                 actual = parser.parse(number)
@@ -60,6 +60,11 @@ class TestParser(unittest.TestCase):
         rejected = ["0.", ".0"]
         for number in rejected:
             with self.assertRaises(parser.IncompleteParseError):
+                parser.parse(number)
+
+        floats = ["123.321", "12.0", "-123.321", "-12.0"]
+        for number in floats:
+            with self.assertRaises(parser.VisitationError):
                 parser.parse(number)
 
     def test_simple_math_1(self):
