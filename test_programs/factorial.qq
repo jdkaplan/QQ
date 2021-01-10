@@ -23,7 +23,35 @@
 ]
 def
 
+"loop_factorial"
+[
+    [
+	1
+	dup
+	rot
+	==
+	[ break ]
+	dec
+	rot
+	if
+	dup
+	*
+    ]
+    dup
+    loop
+    pop
+]
+def
+
+
 "factorial"
+[ 10 ]
+call
+exec
+print
+pop
+
+"loop_factorial"
 [ 10 ]
 call
 exec

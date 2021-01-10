@@ -5,7 +5,7 @@ class Loop(command.Command):
     def execute(self, env):
         body = env.qframe.popleft()
         while True:
-            resp = body.execute(env)
+            resp = body.copy().execute(env)
             if resp == command.LOOP_TERMINATE:
                 return command.NO_TERMINATE
             elif resp == command.FUNC_TERMINATE:
@@ -20,3 +20,8 @@ class RIfBreak(command.Command):
         cond = bool(env.rqueue.pop().value)
         if cond:
             return command.LOOP_TERMINATE
+
+
+class Break(command.Command):
+    def execute(self, env):
+        return command.LOOP_TERMINATE
