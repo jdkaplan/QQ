@@ -12,13 +12,17 @@ And it's clearly very intuitive to use.
 
 Here are some of the programs that language designers are contractually obligated to write:
 
-`hello_world.qq`:
+<details><summary>hello_world.qq</summary>
+
 ```
 "hello world"
 print
 ```
 
-`fizz_buzz.qq`:
+</details>
+
+<details><summary>fizz_buzz.qq</summary>
+
 ```
 "fizzbuzz"
 [
@@ -76,8 +80,10 @@ def
 [ 1 ]
 call
 ```
+</details>
 
-`factorial.qq`:
+<details><summary>factorial.qq</summary>
+
 ```
 "factorial"
 [
@@ -138,6 +144,7 @@ call
 exec
 print
 ```
+</details>
 
 ## Memory Model
 
