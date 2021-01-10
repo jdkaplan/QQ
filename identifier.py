@@ -28,6 +28,8 @@ identifiers = {
     'push': queue.Push,
     'rpush': queue.RPush,
     'qpush': queue.QPush,
+    'rqalloc': queue.RQAlloc,
+    'pack': queue.Pack,
 }
 
 

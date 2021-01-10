@@ -112,3 +112,10 @@ class PushBase:
 class Push(Command, PushBase, QueueFrameBase): pass  # This is the same as Rot, but left it for funsies
 class RPush(Command, PushBase, RegisterQueueBase): pass
 class QPush(Command, PushBase, QQueueBase): pass
+
+
+class Pack(Command):
+    def execute(self, env):
+        size = env.popleft()
+        new_q = datatypes.Queue([env.qframe.pop() for _ in range(size)])
+        env.qframe.append(new_q)
