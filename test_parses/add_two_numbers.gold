@@ -1,1 +1,1 @@
-Queue(statements=deque([Number(value=1.0), Number(value=2.0), Command(name='Add'), Command(name='Print')]))
+Queue(statements=deque([Number(value=1), Number(value=2), Command(name='Add'), Command(name='Print')]))
