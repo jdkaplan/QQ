@@ -1,3 +1,5 @@
-true
+false
 not
+[ drain "hello world" print ]
+if
 QQ

@@ -35,7 +35,7 @@ class IfElse(command.Command):
 
 class Not(command.Command):
     def execute(self, env):
-        env.qframe.append(datatypes.Boolean(not env.qframe.popleft()))
+        env.qframe.append(datatypes.Boolean(not env.qframe.popleft().value))
 
 
 class BoolBinOp(command.Command):
