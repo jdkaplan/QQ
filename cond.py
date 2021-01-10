@@ -8,6 +8,7 @@ class If(command.Command):
     def execute(self, env):
         if len(env.qframe) < 2 or type(env.qframe[1]) != datatypes.Queue:
             raise exceptions.QQError("If statement needs a condition and code block in the front of the queue.")
+
         cond = env.qframe.popleft()
         consequent = env.qframe.popleft()
 

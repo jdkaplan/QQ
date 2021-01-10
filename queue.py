@@ -11,7 +11,7 @@ class RQueue(Command):
         self.size = size
 
     def push(self, val):
-        assert self.size <= len(self.q)
+        assert self.size >= len(self.q)
         if self.size == len(self.q):
             raise exceptions.QQError("Register queue is full.")
         self.q.append(val)
@@ -25,7 +25,7 @@ class RQAlloc(Command):
         if env.rqueue is not None:
             raise exceptions.QQError("Register queue is already allocated")
         size = env.qframe.popleft()
-        env.rqueue = RQueue(size)
+        env.rqueue = RQueue(size.value)
 
 
 class QueueFrameBase:
@@ -59,13 +59,13 @@ class RegisterQueueBase:
         if env.rqueue is None:
             raise exceptions.QQError("Register queue is not allocated")
 
-        env.rqueue.push()
+        env.rqueue.push(val)
 
 
 class QQueueBase:
     def get_queue(self, env):
         if type(env.qframe[0]) != datatypes.Queue:
-            raise exceptions.QQException("Element at front of queue is not a Queue")
+            raise exceptions.QQError("Element at front of queue is not a Queue")
         self.queue = env.qframe.popleft()
 
     def return_queue(self, env):
@@ -146,5 +146,5 @@ class QDup(Command, DupBase, QQueueBase): pass
 class Pack(Command):
     def execute(self, env):
         size = env.qframe.popleft()
-        new_q = datatypes.Queue([env.qframe.popleft() for _ in range(size)])
+        new_q = datatypes.Queue([env.qframe.popleft() for _ in range(int(size.value))])
         env.qframe.append(new_q)

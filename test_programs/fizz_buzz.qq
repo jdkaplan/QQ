@@ -1,0 +1,55 @@
+"fizzbuzz"
+[
+  dup
+
+  100
+  rot
+  >
+  [ ret ]
+  rot
+  if
+
+  dup
+
+  3
+  rot
+  %
+  [
+    dup
+
+    5 rot
+    %
+    [ print ]
+    [ "buzz" rot print pop ]
+    rot
+    ifelse
+  ]
+  [
+    "fizz" rot write pop
+    dup
+
+    5 rot
+    %
+    [ " " rot print pop ]
+    [ "buzz" rot print pop ]
+    rot
+    ifelse
+  ]
+  rot
+  ifelse
+
+  1
+  +
+  1
+  rot
+  pack
+
+  "fizzbuzz"
+  rot
+  call
+]
+def
+
+"fizzbuzz"
+[ 1 ]
+call

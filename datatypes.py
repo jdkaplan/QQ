@@ -67,7 +67,7 @@ class Block(ASQ):
         return repr(self)
 
     def copy(self):
-        return Block([s.copy() for s in self.statement])
+        return Block([s.copy() for s in self.statements])
 
 
 
@@ -98,4 +98,4 @@ class Queue(ASQ):
         return repr(self)
 
     def copy(self):
-        return Queue([s.copy() for s in self.statement])
+        return Queue([s.copy() for s in self.statements])
